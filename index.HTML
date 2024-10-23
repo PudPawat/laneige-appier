@@ -86,10 +86,10 @@ width: 100%;
 <div class="container">
   <h1>Email Preferences
   </h1>
-  <p>Below are your current subscriptions and preferences for the email address: kangnancy73@gmail.com. You may use this page to update your selections or choose to unsubscribe from all our email communications.
+  <p>Below are your current subscriptions and preferences. You may use this page to update your selections or choose to unsubscribe from all our email communications.
   </p>
   <br>
-  <form action="https://www.google.com" method="post">
+  <form id = "unsub_form" class = "unsub_form" action="https://www.google.com" method="post">
     <fieldset>
    
       <h2>Preferences
@@ -141,32 +141,32 @@ width: 100%;
 
 </body>
 <script>
-    document.getElementById('unsubscribeForm').addEventListener('submit', function(event) {
-      event.preventDefault(); // Prevent the form from submitting normally
-  
-      // Capture form data
-      const formData = new FormData(this);
-  
-      // Log form data to console for testing
-      for (let [key, value] of formData.entries()) {
-        console.log(`${key}: ${value}`);
-      }
-  
-      // Simulate sending the data to the server
-      alert('Your preferences have been submitted.');
-  
-      // Optionally, submit the form via AJAX
-      // fetch('http://cloud.crm.amorepacific.com/unsubcontrol?qs=5b4d7c34892c4756be9e38b40bd36367b94045a9fe014ec9fe063d15d26182ee18e75e086c6b1f3c', {
-      //   method: 'POST',
-      //   body: formData
-      // }).then(response => {
-      //   if (response.ok) {
-      //     alert('Unsubscribed successfully!');
-      //   } else {
-      //     alert('Error occurred.');
-      //   }
-      // });
-    });
+    const REDIRECT_URL = 'https://sulwhasoo-appier-mkbvm5x2j-pudpawats-projects.vercel.app/'; // Redirect URL
+
+document.getElementById('unsub_form').addEventListener('submit', function(event) {
+  event.preventDefault(); // Prevent the form from submitting normally
+
+  // Capture form data
+  const formData = new FormData(this);
+
+  // Prepare a message to show the form data
+  reason = formData.get('reason');
+
+  // If 'Other' is selected, also show the specified reason
+  if (reason === 'Other') {
+    const otherReason = formData.get('other_reason');
+    reason += `: ${otherReason}`;
+  }
+
+
+  // Display the message in an alert
+//   alert(reason);
+    appier('identity', {'unsub_reason': reason})
+
+  // Redirect to Google after showing the alert
+    window.location.href = "https://sg.laneige.com/"  + '?aiq_id_reason_unsub=' + reason;
+});
+    
   </script>
 
 </html>
