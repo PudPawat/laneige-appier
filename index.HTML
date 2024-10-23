@@ -164,7 +164,8 @@ document.getElementById('unsub_form').addEventListener('submit', function(event)
     appier('identity', {'unsub_reason': reason})
 
   // Redirect to Google after showing the alert
-    window.location.href = "https://sg.laneige.com/"  + '?aiq_id_reason_unsub=' + reason;
+  setTimeout( window.location.href = "https://sg.laneige.com/"  + '?aiq_id_reason_unsub=' + reason, 2000);
+   
 });
     
   </script>
